@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    /* Lenis yang menangani kehalusan scroll. Kalau keduanya aktif, gerakan
+        anchor jadi dobel dan terasa lengket. */
+    scroll-behavior: auto;
+  }
+
+  body {
+    @apply bg-cream text-cocoa antialiased;
+    font-family: var(--font-jakarta), system-ui, sans-serif;
+  }
+
+  ::selection {
+    @apply bg-ember text-cream;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell px-5 sm:px-8;
+  }
+
+  .section {
+    @apply py-20 md:py-28;
+  }
+
+  /* Label kecil di atas heading — pola berulang di seluruh desain. */
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-eyebrow text-ember;
+  }
+
+  .heading {
+    @apply font-bold leading-[1.05] tracking-tight text-ink;
+  }
+}
+
+@layer utilities {
+  /* Menghentikan SEMUA animasi bagi user yang memilih "reduce motion" di OS.
+     Ini jaring pengaman: kalau ada satu komponen yang lupa mengeceknya,
+     aturan ini tetap menangkapnya. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ==========================================
+   TAMBAHAN: Sembunyikan Banner & Gangguan Google Translate
+   ================================---------- */
+
+/* Menghilangkan iframe banner di bagian atas halaman */
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+/* Mencegah body bergeser ke bawah karena banner Google */
+body {
+  top: 0px !important;
+  position: static !important;
+}
+
+/* Menyembunyikan tooltip pop-up terjemahan saat teks disorot */
+.goog-tooltip {
+  display: none !important;
+}
+
+.goog-tooltip:hover {
+  display: none !important;
+}
+
+/* Menghilangkan highlight kuning bawaan Google Translate */
+.goog-text-highlight {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Menyembunyikan elemen widget bawaan yang tidak sengaja tampil */
+.goog-te-gadget {
+  color: transparent !important;
+}
+
+.goog-te-gadget span {
+  display: none !important;
+}
+
+/* Sembunyikan banner top-bar bawaan Google Translate */
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+
+/* Sembunyikan tooltip/highlight bawaan Google saat hover teks */
+.goog-text-highlight {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
